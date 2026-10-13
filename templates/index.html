@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Киберспортивный турнир — Итоговый проект</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; color: #333; }
+        h1, h2 { color: #2c3e50; }
+        .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #3498db; color: white; }
+        form input, form select, form button { padding: 8px; margin-right: 10px; margin-bottom: 10px; }
+        .top-list { background: #e8f8f5; padding: 10px; border-left: 4px solid #27ae60; }
+    </style>
+</head>
+<body>
+
+    <h1>Киберспортивный Турнир (Управление базой)</h1>
+
+    <div class="container">
+        <h2>Топ-3 участника (через генератор)</h2>
+        <div class="top-list">
+            <ul>
+                {% for p in top_list %}
+                    <li>{{ p.get_info() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Поиск и Сортировка</h2>
+        <form method="GET" action="/">
+            <input type="text" name="search" placeholder="Поиск по имени..." value="{{ search_query }}">
+            <button type="submit">Найти</button>
+            <a href="/"><button type="button">Сбросить</button></a>
+            <a href="/?sort=rating"><button type="button">Сортировать по рейтингу (Bubble Sort)</button></a>
+        </form>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Тип</th>
+                <th>Имя / Никнейм</th>
+                <th>Игра</th>
+                <th>Рейтинг</th>
+                <th>Информация (Полиморфизм)</th>
+            </tr>
+            {% for p in participants %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ "Игрок" if p.__class__.__name__ == "Player" else "Команда" }}</td>
+                <td>{{ p.nickname if p.nickname is defined else p.name }}</td>
+                <td>{{ p.game }}</td>
+                <td>{{ p.rating }}</td>
+                <td>{{ p.get_info() }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Добавить участника</h2>
+        <form method="POST" action="/add">
+            <input type="number" name="id" placeholder="ID (число)" required>
+            <select name="type">
+                <option value="player">Игрок</option>
+                <option value="team">Команда</option>
+            </select>
+            <input type="text" name="name" placeholder="Имя / Ник" required>
+            <input type="text" name="game" placeholder="Дисциплина (игра)" required>
+            <input type="number" name="rating" placeholder="Рейтинг" value="1000" required>
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+</body>
+</html>
