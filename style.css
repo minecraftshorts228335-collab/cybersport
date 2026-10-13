@@ -1,0 +1,126 @@
+/* Базовые адаптивные настройки */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Главный контейнер (адаптивная ширина) */
+.container, main, .wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+/* Формы и элементы ввода (увеличены для пальцев) */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px; /* Предотвращает автоматический зум на iOS */
+    background-color: #fff;
+}
+
+/* Кнопки (удобные для тач-скрина) */
+button, 
+input[type="submit"], 
+.btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+}
+
+button:active, 
+.btn:active {
+    background-color: #1d4ed8;
+}
+
+/* Таблицы с горизонтальной прокруткой для телефонов */
+.table-responsive, .table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap; /* Защита от сжатия текста */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f8fafc;
+    font-weight: 600;
+}
+
+/* Карточки элементов (если используются вместо таблиц на мобилках) */
+.card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+/* Медиа-запрос для ПК и планшетов (экраны шире 768px) */
+@media (min-width: 768px) {
+    body {
+        padding: 30px;
+    }
+
+    h1, h2, h3 {
+        font-size: 2rem;
+    }
+
+    button, 
+    input[type="submit"], 
+    .btn {
+        width: auto;
+        padding: 10px 20px;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    select {
+        max-width: 400px;
+    }
+}
